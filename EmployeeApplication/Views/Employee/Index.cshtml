@@ -1,0 +1,119 @@
+﻿@model IEnumerable<EmployeeApplication.Models.Employee>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prefix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suffix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimaryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondaryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Languages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Read)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Write)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Speak)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousEmployer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousEmployerAddress)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prefix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suffix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondaryAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Languages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Read)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Write)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speak)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousEmployer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousEmployerAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

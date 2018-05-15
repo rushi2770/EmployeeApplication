@@ -1,0 +1,138 @@
+﻿@model IEnumerable<EmployeeApplication.Models.EmployeeModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employee</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>EmployeeModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Create","Create","Employee")
+                    
+                </div>
+            </div>
+
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.MiddleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.Prefix)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.Suffix)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.PrimaryAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.SecondaryAddress)
+                </th>
+                <th>
+                    @Html.Label("Languages")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.Salary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.PreviousEmployer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.employee.PreviousEmployerAddress)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.Prefix)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.MiddleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.LastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.Suffix)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.PrimaryAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.SecondaryAddress)
+                    </td>
+                    @{
+                        int i = 0;
+                    }
+                    <td>
+                        <table class="border border-white" style="width: 100%;">
+                                @foreach (var language in item.Language)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => language.Language)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => language.Read)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => language.Write)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => language.Speak)
+                                        </td>
+                                    </tr>
+                                }
+                                   
+                        </table>
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.PreviousEmployer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.PreviousEmployerAddress)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
