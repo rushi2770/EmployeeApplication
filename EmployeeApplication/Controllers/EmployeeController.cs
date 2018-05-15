@@ -10,6 +10,10 @@ namespace EmployeeApplication.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
+        
+
+        List<EmployeeModel> empList = new List<EmployeeModel>();
+        
         public ActionResult Index()
         {
             List<Employee> employeeList = new List<Employee>();
@@ -43,70 +47,92 @@ namespace EmployeeApplication.Controllers
                 PreviousEmployer = "softhq",
                 PreviousEmployerAddress = "PreviousEmployerAddress"
             };
-
-            List<Languages> languagesList = new List<Languages>();
-            languagesList.Add(new Languages()
-            {
-                Language = "english",
-                Read = true,
-                Write = true,
-                Speak = true
-            });
-            languagesList.Add(new Languages()
-            {
-                Language = "Hindi",
-                Read = true,
-                Write = true,
-                Speak = true
-            });
-            languagesList.Add(new Languages()
-            {
-                Language = "Telugu",
-                Read = true,
-                Write = true,
-                Speak = true
-            });
-
-            List<EmployeeModel> empList = new List<EmployeeModel>();
             EmployeeModel emp = new EmployeeModel()
             {
                 employee = satish,
-                Language = languagesList
+                Language = GetLanguageList()
             };
             EmployeeModel emp2 = new EmployeeModel()
             {
                 employee = emp1,
-                Language = languagesList
+                Language = GetLanguageList()
             };
             empList.Add(emp);
             empList.Add(emp2);
             employeeList.Add(satish);
-            // ViewBag.Languages = LanguagesList;
-            // return View("Index", employeeList);
-            //return View("Create");
+      
             return View("Employee", empList);
         }
         //added comments
         public ActionResult Create()
         {
             List<SelectListItem> SuffixList = new List<SelectListItem>();
-            SuffixList.Add(new SelectListItem { Text = "Jr", Value = "1" });
-            SuffixList.Add(new SelectListItem { Text = "I", Value = "2" });
-            SuffixList.Add(new SelectListItem { Text = "II", Value = "3" });
+            SuffixList.Add(new SelectListItem { Text = "Jr", Value = "Jr" });
+            SuffixList.Add(new SelectListItem { Text = "I", Value = "I" });
+            SuffixList.Add(new SelectListItem { Text = "II", Value = "II" });
             ViewBag.SuffixList = SuffixList;
             List<SelectListItem> PrefixList = new List<SelectListItem>();
-            PrefixList.Add(new SelectListItem { Text = "Mr.", Value = "1" });
-            PrefixList.Add(new SelectListItem { Text = "Ms.", Value = "2" });
-            PrefixList.Add(new SelectListItem { Text = "Dr.", Value = "3" });
+            PrefixList.Add(new SelectListItem { Text = "Mr.", Value = "Mr." });
+            PrefixList.Add(new SelectListItem { Text = "Ms.", Value = "Ms." });
+            PrefixList.Add(new SelectListItem { Text = "Dr.", Value = "Dr." });
             ViewBag.PrefixList = PrefixList;
-            return View("Create");
+            EmployeeModel emp = new EmployeeModel();
+
+            emp.Language = GetLanguageList();
+            return View("Create",emp );
         }
 
         [HttpPost]
         public ActionResult Create(EmployeeModel postRecord)
         {
+            EmployeeModel newRecord = new EmployeeModel();
+            newRecord.employee = postRecord.employee;
+            newRecord.lang = postRecord.lang;
+            newRecord.employee.Prefix = postRecord.PrefixSelected;
+            newRecord.employee.Suffix = postRecord.SuffixSelected;
+            List<Languages> languagesList = new List<Languages>();
+   
+            foreach(var item in postRecord.Language)
+            {
+                languagesList.Add(new Languages()
+                {
+                    Language = item.Language,
+                    Read = item.Read,
+                    Write = item.Write,
+                    Speak = item.Speak
+                });
+            }
+            newRecord.Language = languagesList;
+            empList.Add(newRecord);
 
-            return View();
+            return View("Employee", empList);
+        }
+        
+        private List<Languages> GetLanguageList()
+        {
+            List<Languages> languagesList = new List<Languages>();
+            languagesList.Add(new Languages()
+            {
+                Language = "English",
+                Read = false,
+                Write = false,
+                Speak = false
+            });
+            languagesList.Add(new Languages()
+            {
+                Language = "Hindi",
+                Read = false,
+                Write = false,
+                Speak = false
+            });
+            languagesList.Add(new Languages()
+            {
+                Language = "Telugu",
+                Read = false,
+                Write = false,
+                Speak = false
+            });
+            return languagesList;
         }
     }
 }
