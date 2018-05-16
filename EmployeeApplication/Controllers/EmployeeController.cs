@@ -12,7 +12,7 @@ namespace EmployeeApplication.Controllers
         // GET: Employee
         
 
-        List<EmployeeModel> empList = new List<EmployeeModel>();
+        List<EmployeeModel> empModelList = new List<EmployeeModel>();
         
         public ActionResult Index()
         {
@@ -47,6 +47,8 @@ namespace EmployeeApplication.Controllers
                 PreviousEmployer = "softhq",
                 PreviousEmployerAddress = "PreviousEmployerAddress"
             };
+            employeeList.Add(satish);
+
             EmployeeModel emp = new EmployeeModel()
             {
                 employee = satish,
@@ -57,11 +59,12 @@ namespace EmployeeApplication.Controllers
                 employee = emp1,
                 Language = GetLanguageList()
             };
-            empList.Add(emp);
-            empList.Add(emp2);
-            employeeList.Add(satish);
+
+            empModelList.Add(emp);
+            empModelList.Add(emp2);
+            
       
-            return View("Employee", empList);
+            return View("Employee", empModelList);
         }
         //added comments
         public ActionResult Create()
@@ -103,9 +106,9 @@ namespace EmployeeApplication.Controllers
                 });
             }
             newRecord.Language = languagesList;
-            empList.Add(newRecord);
+            empModelList.Add(newRecord);
 
-            return View("Employee", empList);
+            return View("Employee", empModelList);
         }
         
         private List<Languages> GetLanguageList()
